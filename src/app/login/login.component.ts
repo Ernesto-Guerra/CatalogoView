@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -41,35 +41,16 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
+    this.authenticationService.login(this.f.email.value, this.f.password.value)
         .pipe(first())
         .subscribe(
             data => {
                 this.router.navigate(["/signup"]);
             },
             error => {
-                this.error = error;
+                this.error = error.statusText;
                 this.loading = false;
     });
-
-
-    // this.service.login(this.login).subscribe(response =>{
-    //   // console.log(response)
-
-    //   if(response.hasOwnProperty('token')){
-    //     console.log('Good')
-
-    //     // Resto
-    //     localStorage.setItem('data', JSON.stringify(response))
-
-    //     console.log(JSON.parse(localStorage.getItem('data')).token)
-
-    //   }
-    //   else{
-    //     console.log('Bad')
-    //   }
-
-    // })
   }
 
 }
