@@ -4,12 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Student } from '../models/student';
 
-const httpOptions = {
-  headers : new HttpHeaders({
-    'Content-Type' :'application/json',
-    'authorization' : `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`
-  })
-}
 
 @Injectable({
   providedIn: 'root'
@@ -20,18 +14,18 @@ export class StudentService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<Student[]>(`${this.api}/students`,httpOptions);
+    return this.http.get<Student[]>(`${this.api}/students`);
   }
 
   delete(id){
-    return this.http.delete(`${this.api}/students/${id}`,httpOptions)
+    return this.http.delete(`${this.api}/students/${id}`)
   }
 
   show(id){
-    return this.http.get(`${this.api}/students/${id}`,httpOptions)
+    return this.http.get<Student[]>(`${this.api}/students/${id}`)
   }
 
   update(student,id){
-    return this.http.put(`${this.api}/students/${id}`,student,httpOptions)
+    return this.http.put(`${this.api}/students/${id}`,student)
   }
 }

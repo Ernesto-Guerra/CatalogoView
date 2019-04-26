@@ -9,34 +9,34 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditStudentComponent implements OnInit {
 
-  constructor(private studentService:StudentService, private route: ActivatedRoute) { }
+  constructor(private studentService: StudentService, private route: ActivatedRoute) { }
 
   id = null
 
-  student={}
+  student = {}
 
   ngOnInit() {
-    this.route.params.subscribe(params=>{
-      this.id= +params['id']
+    this.route.params.subscribe(params => {
+      this.id = +params['id']
 
-      this.studentService.show(this.id).subscribe(response=>{
+      this.studentService.show(this.id).subscribe(response => {
         console.log(response)
-        this.student=response
+        this.student = response
       })
-    })    
+    })
   }
 
-  save(){
-   if(confirm('¿Guardar cambios?')){
-    this.studentService.update(this.student,this.id).subscribe(response=>{
-      console.log(response)
-      alert('Se guardaron los cambios')
-      location.replace('/home')
-    })
-   }
-   else{
-     alert('No se guardaron los cambios')
-   }
+  save() {
+    if (confirm('¿Guardar cambios?')) {
+      this.studentService.update(this.student, this.id).subscribe(response => {
+        console.log(response)
+        alert('Se guardaron los cambios')
+        location.replace('/home')
+      })
+    }
+    else {
+      alert('No se guardaron los cambios')
+    }
   }
 
 }

@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
       this.studentService.delete(id).subscribe(response=>{
         if(response.hasOwnProperty('msg')){
           alert('El estudiante fue eliminado')
-          location.reload()
+          console.log(this.students)          
         }
         else{
           alert('El estudiante no fue eliminado')

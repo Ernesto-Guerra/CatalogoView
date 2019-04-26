@@ -6,4 +6,6 @@ export class Student {
     sex: string;
     curp: string;
     grade: string;
+
+    
 }
