@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
+import { EditStudentComponent } from './edit-student/edit-student.component'
 
 import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
@@ -21,8 +22,13 @@ const routes: Routes = [
     path: 'signup', 
     component: SignupComponent
   },
+  {
+    path:'student/:id',
+    component : EditStudentComponent
+  },
   // otherwise redirect to home
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' },
+  
 ]; 
 
 @NgModule({

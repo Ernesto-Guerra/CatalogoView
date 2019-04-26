@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Student } from '../models/student';
 import { StudentService } from '../services/student.service';
 import { first } from 'rxjs/operators';
@@ -22,4 +21,25 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  delete(id){
+    if(confirm('¿Deseas eliminar a este estudiante con matricula '+id+'?')){
+      this.studentService.delete(id).subscribe(response=>{
+        if(response.hasOwnProperty('msg')){
+          alert('El estudiante fue eliminado')
+          location.reload()
+        }
+        else{
+          alert('El estudiante no fue eliminado')
+          console.log(response)
+        }
+      })
+    }
+    else{
+      alert('El estudiante no fue eliminado')
+    }
+  }
+
+  openEdit(student){
+    
+  }
 }

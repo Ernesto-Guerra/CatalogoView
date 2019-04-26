@@ -22,4 +22,16 @@ export class StudentService {
   getAll() {
     return this.http.get<Student[]>(`${this.api}/students`,httpOptions);
   }
+
+  delete(id){
+    return this.http.delete(`${this.api}/students/${id}`,httpOptions)
+  }
+
+  show(id){
+    return this.http.get(`${this.api}/students/${id}`,httpOptions)
+  }
+
+  update(student,id){
+    return this.http.put(`${this.api}/students/${id}`,student,httpOptions)
+  }
 }
