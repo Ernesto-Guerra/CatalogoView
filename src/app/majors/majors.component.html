@@ -1,0 +1,16 @@
+<div class="container text-center">
+  <h1>Carreras</h1>
+</div>
+
+<div class="container">
+  <div>
+    <div class="form-group">
+      <label for="major_id">Carreras</label><br>
+      <select class="form-control" [(ngModel)]="major.major_id">
+        <option [value]="major.id" *ngFor="let major of majors">{{major.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="btn btn-success btn-block" (click)="filter()">Buscar</button>
+</div>

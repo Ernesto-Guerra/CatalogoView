@@ -2,7 +2,7 @@
   <div>
     <div class="form-group">
       <label for="card">Matricula</label>
-      <input name="card" type="text" disabled class="form-control" [(ngModel)]="student.card">
+      <input name="card" type="text" [disabled]="disabled" class="form-control" [(ngModel)]="student.card">
     </div>
   </div>
   
@@ -22,8 +22,10 @@
   
   <div>
     <div class="form-group">
-      <label for="major_id">Carrera</label>
-      <input name="major_id" type="text" class="form-control" [(ngModel)]="student.major_id">
+      <label for="major_id">Carreras</label><br>
+      <select class="form-control" [(ngModel)]="student.major_id">
+        <option [value]="major.id" *ngFor="let major of majors">{{major.name}}</option>
+      </select>
     </div>
   </div>
   

@@ -1,36 +1,101 @@
-<div style="background-image: url('https://adn.harmanpro.com/product_attachments/product_attachments/3669_1478528364/Si3VCSVertical_original.jpeg')">
-  <div class="container">
-    <h2 class="mat-h2">Bienvenue chez SIDRIE</h2>
-    <!-- <img src="https://adn.harmanpro.com/product_attachments/product_attachments/3669_1478528364/Si3VCSVertical_original.jpeg"> -->
-    
-      <table class="table table-striped table-dark">
-        <thead>
-          <tr>
-            <th scope="col">Matricula</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Carrera</th>
-            <th scope="col">Cuatrimestre</th>
-            <th scope="col">CURP</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let student of students">
-            <th scope="row">{{student.card}}</th>            
-            <td>{{student.first_name}}</td>
-            <td>{{student.last_name}}</td>
-            <td>{{student.major_id}}</td>
-            <td>{{student.grade}}</td>
-            <td>{{student.curp}}</td>
-            <td>
-              <a class="btn btn-info" [routerLink]="[ '/student/'+student.card ]">Editar</a>
-              <button class="btn btn-danger" (click)="delete(student.card)">Eliminar</button>
-            </td>
-          </tr>         
-        </tbody>
-      </table>
-  </div>
+<div class="container text-center">
+  <h1>{{title}}</h1>
 </div>
 
-<!-- <app-edit-student [id]="173216"></app-edit-student> -->
+<div class="addButton" style="position: absolute;">
+  <input style="position: absolute;" type="checkbox" id="toggle">
+  <label style="position: absolute;" for="toggle" class="button"></label>
+
+  <nav class="nav" style="position: absolute;">
+    <div class="row">
+      <div class="col col-sm 6">
+        <label for="uno">Matricula</label>
+        <input [(ngModel)]="student.card" class="form-control" type="text" name="uno" id="uno"><br>
+      </div>
+
+      <div class="col col-sm 6">
+        <label for="uno">Nombre</label>
+        <input [(ngModel)]="student.first_name" class="form-control" type="text" name="uno" id="uno">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-sm 4">
+        <label for="uno">Apellido</label>
+        <input [(ngModel)]="student.last_name" class="form-control" type="text" name="uno" id="uno"><br>
+      </div>
+
+      <div class="col col-sm 4">
+        <label for="uno">Carrera</label>
+        <select [(ngModel)]="student.major_id" class="custom-select" name="" id="">
+          <option value="1">Ingenieria en Desarrollo de Software</option>
+          <option value="2">Ingenieria Biomedia</option>
+          <option value="3">Ingenieria Mecatronica</option>
+        </select>
+      </div>
+
+      <div class="col col-sm-4">
+        <div class="radio">
+          <input [(ngModel)]="student.sex" type="radio" name="sex" id="sex" value="hombre" checked>Masculino
+        </div>
+        <div class="radio">
+          <input [(ngModel)]="student.sex" type="radio" name="sex" id="sex" value="mujer">Femenino
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-sm 6">
+        <label for="uno">Cuatrimestre</label>
+        <input [(ngModel)]="student.grade" class="form-control" type="text" name="uno" id="uno"><br>
+      </div>
+
+      <div class="col col-sm 6">
+        <label for="uno">CURP</label>
+        <input [(ngModel)]="student.curp" class="form-control" type="text" name="uno" id="uno">
+      </div>
+    </div>
+
+
+    <button (click)="agregar()" style="margin: 10px" class="btn btn-success btn-block">Guardar</button>
+  </nav>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="search-student">
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+        placeholder="&#61442;  Buscar Estudiante">
+    </div>
+
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Matricula</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Carrera</th>
+          <th scope="col">Cuatrimestre</th>
+          <th scope="col">CURP</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr *ngFor="let student of students | filter:searchText | paginate: { itemsPerPage: 1, currentPage: p }">
+          <th scope="row">{{student.card}}</th>
+          <td>{{student.first_name}}</td>
+          <td>{{student.last_name}}</td>
+          <td>{{student.major_name}}</td>
+          <td>{{student.grade}}</td>
+          <td>{{student.curp}}</td>
+          <td>
+            <a class="btn btn-info" [routerLink]="[ '/student/'+student.card ]">Editar</a>
+            <button class="btn btn-danger" (click)="delete(student.card)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+<!-- </div> -->

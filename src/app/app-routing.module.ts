@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { EditStudentComponent } from './edit-student/edit-student.component'
 
 import { AuthGuard } from './guards/auth.guard';
+import { MajorsComponent } from './majors/majors.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   {
@@ -19,11 +20,20 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { 
+    path: 'majors', 
+    component: MajorsComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
     path: 'signup', 
     component: SignupComponent
   },
   {
     path:'student/:id',
+    component : EditStudentComponent
+  },
+  {
+    path:'student/add',
     component : EditStudentComponent
   },
   // otherwise redirect to home
@@ -34,7 +44,7 @@ const routes: Routes = [
 @NgModule({
   imports:[
     RouterModule.forRoot(
-      routes,{enableTracing:true}
+      routes,{enableTracing:false}
     )
   ],
   exports: [ RouterModule ]

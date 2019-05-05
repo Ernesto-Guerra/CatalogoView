@@ -18,13 +18,17 @@ import { HomeComponent } from './home/home.component';
 import { EditStudentComponent } from './edit-student/edit-student.component';
 import { JwtInterceptor} from './helpers/jwt.interceptor';
 import { ErrorInterceptor} from './helpers/error.interceptor';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { MajorsComponent } from './majors/majors.component'; 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
     LoginComponent,
     HomeComponent,
-    EditStudentComponent
+    EditStudentComponent,
+    MajorsComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,9 @@ import { ErrorInterceptor} from './helpers/error.interceptor';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule
 
   ],
   providers: [

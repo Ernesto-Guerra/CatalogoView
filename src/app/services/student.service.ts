@@ -3,7 +3,8 @@ import { API } from 'src/app/app-config'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Student } from '../models/student';
-
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,15 +18,22 @@ export class StudentService {
     return this.http.get<Student[]>(`${this.api}/students`);
   }
 
-  delete(id){
+  delete(id) {
     return this.http.delete(`${this.api}/students/${id}`)
   }
 
-  show(id){
+  show(id) {
     return this.http.get<Student[]>(`${this.api}/students/${id}`)
   }
 
-  update(student,id){
-    return this.http.put(`${this.api}/students/${id}`,student)
+  update(student, id) {
+    console.log(student)
+    return this.http.put(`${this.api}/students/${id}`, student)
+  }
+
+  /** POST: add a new hero to the database */
+  add(student) {
+    console.log(student)
+    return this.http.post<Student>(`${this.api}/students`, student)
   }
 }
