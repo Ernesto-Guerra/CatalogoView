@@ -18,6 +18,10 @@ export class StudentService {
     return this.http.get<Student[]>(`${this.api}/students`);
   }
 
+  getAllByMajor(id){
+    return this.http.get<Student[]>(`${this.api}/students/major/${id}`);
+  }
+
   delete(id) {
     return this.http.delete(`${this.api}/students/${id}`)
   }

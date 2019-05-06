@@ -6,7 +6,7 @@
   <div>
     <div class="form-group">
       <label for="major_id">Carreras</label><br>
-      <select class="form-control" [(ngModel)]="major.major_id">
+      <select class="form-control" [(ngModel)]="major">
         <option [value]="major.id" *ngFor="let major of majors">{{major.name}}</option>
       </select>
     </div>
