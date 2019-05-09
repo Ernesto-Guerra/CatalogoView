@@ -16,7 +16,10 @@ export class HomeComponent implements OnInit {
   searchText;
   students: Student[] = [];
   table = null;
-  student = {}
+  student = {
+    sex:null,
+    grade:null
+  }
 
   constructor(
     private studentService: StudentService,
@@ -40,12 +43,41 @@ export class HomeComponent implements OnInit {
   agregar(){
     console.log('Llega')
     console.log(this.student)
+    
+    if(this.student.sex==null || this.student.sex==''){
+      console.log('no hay genero')
+      var genero = this.obtenerGenero(this.student)
+
+      this.student.sex=genero
+
+      console.log('Completo')
+    console.log(this.student)
+    }
+    else{
+      console.log('sí hay genero')
+    }
+
+    // *----------------------------------------------
+    if(this.student.grade==null){
+      console.log('no hay grado')            
+      var grado = this.obtenerGrado(this.student)
+      console.log('Completo')
+      this.student.grade=grado
+    console.log(this.student)
+    }
+    else{
+      console.log('sí hay grado')
+    }
+
         this.studentService.add(this.student).subscribe(response => {
           console.log(response)
           alert('Se agrego el estudiante')
-          this.student={}
+          this.student={
+            sex:null,
+            grade:null
+          }
           location.replace('/home')
-        })
+        })        
   }
 
   delete(id){
@@ -68,5 +100,69 @@ export class HomeComponent implements OnInit {
 
   openEdit(student){
     
+  }
+
+  obtenerGenero(student){
+    var genero = student.curp.charAt(10)
+
+    if(genero == 'H' || genero == 'h'){
+      genero = 'hombre'
+    }
+    else if(genero == 'M' || genero == 'm'){
+      genero = 'mujer'
+    }
+    else{
+      genero = 'N/A'
+    }
+
+    // console.log(genero)
+    return genero
+  }
+
+  obtenerGrado(student){
+
+    var grado = 0
+    // año de inscripcion
+    var year = student.card.slice(0,2)
+    // periodo de inscripcion
+    var cuatri = student.card.slice(2,3)
+
+    // console.log(year)
+    // console.log(cuatri)
+
+    var date_now = new Date().toDateString()
+    // año actual
+    var year_now = parseInt(date_now.slice(date_now.length-2,date_now.length))
+    // cuatri actual
+    var cuatri_now = parseInt(date_now.slice(date_now.length-7,date_now.length-5))    
+
+    if(cuatri_now<=4){
+      cuatri_now=1
+    }
+    else if(cuatri_now<=8){
+      cuatri_now=2
+    }
+    else{
+      cuatri_now=3
+    }
+      
+      for (let i = year; i <= year_now; i++) {
+        for (let j = 1; j <= 3; j++) {          
+          
+          if(i==year_now){
+            if(j<cuatri){
+              break;
+            }
+            grado = grado + 1
+          }
+          else{
+            grado = grado + 1
+          }
+          
+        }
+      }
+     
+      // console.log('El cuatrimestre es: '+grado) 
+      return grado
   }
 }

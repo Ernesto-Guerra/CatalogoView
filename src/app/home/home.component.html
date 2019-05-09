@@ -2,7 +2,7 @@
   <h1>{{title}}</h1>
 </div>
 
-<div class="addButton" style="position: absolute;">
+<div class="addButton align-content-center" style="position: absolute;">
   <input style="position: absolute;" type="checkbox" id="toggle">
   <label style="position: absolute;" for="toggle" class="button"></label>
 
@@ -20,34 +20,34 @@
     </div>
 
     <div class="row">
-      <div class="col col-sm 4">
+      <div class="col col-sm 6">
         <label for="uno">Apellido</label>
         <input [(ngModel)]="student.last_name" class="form-control" type="text" name="uno" id="uno"><br>
       </div>
 
-      <div class="col col-sm 4">
+      <div class="col col-sm 6">
         <label for="uno">Carrera</label>
         <select [(ngModel)]="student.major_id" class="custom-select" name="" id="">
           <option value="1">Ingenieria en Desarrollo de Software</option>
-          <option value="2">Ingenieria Biomedia</option>
+          <option value="2">Ingenieria Biomedica</option>
           <option value="3">Ingenieria Mecatronica</option>
         </select>
       </div>
-
-      <div class="col col-sm-4">
-        <div class="radio">
-          <input [(ngModel)]="student.sex" type="radio" name="sex" id="sex" value="hombre" checked>Masculino
-        </div>
-        <div class="radio">
-          <input [(ngModel)]="student.sex" type="radio" name="sex" id="sex" value="mujer">Femenino
-        </div>
-      </div>
+      
     </div>
 
     <div class="row">
-      <div class="col col-sm 6">
+      <!-- <div class="col col-sm 6">
         <label for="uno">Cuatrimestre</label>
         <input [(ngModel)]="student.grade" class="form-control" type="text" name="uno" id="uno"><br>
+      </div> -->
+
+      <div class="col col-sm-6" *ngIf="student.curp==null || student.curp==''">
+          <label for="uno">Genero</label>
+        <select name="sex" id="sex" [(ngModel)]="student.sex" class="custom-select">
+          <option value="hombre">Hombre</option>
+          <option value="mujer">Mujer</option>
+        </select>
       </div>
 
       <div class="col col-sm 6">
