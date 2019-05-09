@@ -4,6 +4,7 @@ import { StudentService } from '../services/student.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { CombineLatestOperator } from 'rxjs/internal/observable/combineLatest';
 
 @Component({
   selector: 'app-home',
@@ -56,8 +57,7 @@ export class HomeComponent implements OnInit {
     else{
       console.log('sí hay genero')
     }
-
-    // *----------------------------------------------
+    
     if(this.student.grade==null){
       console.log('no hay grado')            
       var grado = this.obtenerGrado(this.student)
@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
             grade:null
           }
           location.replace('/home')
-        })        
+        })            
   }
 
   delete(id){
@@ -130,11 +130,16 @@ export class HomeComponent implements OnInit {
     // console.log(year)
     // console.log(cuatri)
 
-    var date_now = new Date().toDateString()
+    var date_now = new Date().toISOString()
     // año actual
-    var year_now = parseInt(date_now.slice(date_now.length-2,date_now.length))
+    var year_now = parseInt(date_now.slice(2,4))
     // cuatri actual
-    var cuatri_now = parseInt(date_now.slice(date_now.length-7,date_now.length-5))    
+    var cuatri_now = parseInt(date_now.slice(5,7))
+
+    // console.log(date_now)
+    // console.log(year_now)
+    // console.log(cuatri_now);
+    
 
     if(cuatri_now<=4){
       cuatri_now=1
