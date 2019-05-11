@@ -46,4 +46,16 @@ export class MajorsComponent implements OnInit {
     });      
   }
 
+  agregar(){
+    console.log(this.major)
+
+    this.majorService.create(this.major).subscribe(response =>{
+      console.log(response)
+
+      alert('Carrera creada con exito')
+
+      location.replace('/majors')
+    })
+  }
+
 }

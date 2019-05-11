@@ -2,6 +2,20 @@
   <h1>Carreras</h1>
 </div>
 
+<div class="addButton align-content-center" style="position: absolute;">
+  <input style="position: absolute;" type="checkbox" id="toggle">
+  <label style="position: absolute;" for="toggle" class="button"></label>
+
+  <nav class="nav" style="position: absolute;">
+    <div class="row more">                  
+        <label for="uno">Nombre</label>
+        <input [(ngModel)]="major.name" class="form-control" type="text" name="uno" id="uno"><br>            
+    </div>    
+
+    <button (click)="agregar()" style="margin: 10px" class="btn btn-success btn-block">Guardar</button>
+  </nav>
+</div>
+
 <div class="container">
   <div>
     <div class="form-group">

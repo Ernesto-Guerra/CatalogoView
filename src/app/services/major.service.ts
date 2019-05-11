@@ -16,4 +16,8 @@ export class MajorService {
   getAll(){
     return this.http.get<Major[]>(`${this.api}/majors`);
   }
+
+  create(major){    
+    return this.http.post(`${this.api}/majors`,major)
+  }
 }
