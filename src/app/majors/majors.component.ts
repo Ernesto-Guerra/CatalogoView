@@ -18,7 +18,7 @@ export class MajorsComponent implements OnInit {
     private studentService: StudentService,
     private route: ActivatedRoute
   ) { }
-
+  ready = false;
   major = {}
   majors: Major[] = []
   students: Student[] = [];
@@ -37,6 +37,7 @@ export class MajorsComponent implements OnInit {
     //obtener con get los alumnos de las carreras
     this.studentService.getAllByMajor(this.major).pipe(first()).subscribe(students => {
       this.students = students;
+      this.ready = true;
       console.log(this.students)
       //entonces redirigir a home con esos alumnos para mostrar
       //ver como mandar un arreglo a otra vista
