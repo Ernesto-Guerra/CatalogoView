@@ -8,6 +8,7 @@ import { EditStudentComponent } from './edit-student/edit-student.component'
 
 import { AuthGuard } from './guards/auth.guard';
 import { MajorsComponent } from './majors/majors.component';
+import { ClassesComponent } from './classes/classes.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   {
@@ -22,6 +23,11 @@ const routes: Routes = [
   { 
     path: 'majors', 
     component: MajorsComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'classes', 
+    component: ClassesComponent,
     canActivate: [AuthGuard]
   },
   { 
