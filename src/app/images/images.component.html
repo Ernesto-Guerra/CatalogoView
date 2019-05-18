@@ -1,4 +1,62 @@
-<video src="" id="video" style="width:700px; height: 350px;" autoplay="true"></video>
 
-<canvas style="display:none;" id="preview"></canvas>
-<div id="logger"></div>
+  <div class="limiter">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+          <a class="navbar-brand" href="home">SIDRIE</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="home">Estudiantes <span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link" href="majors">Carreras</a>
+              <a class="nav-item nav-link" href="classes">Clases</a>
+              <a class="nav-item nav-link disabled" href="#">Disabled</a>
+            </div>
+          </div>
+        </nav>
+    <div class="container-table100">                                  
+      <div class="wrap-table100">
+          <div class="text-center">
+              <h1 style="color:white">Imagenes {{id}}</h1>
+            </div><br>          
+            <div class="row">
+
+              <div class="col col-sm-4">
+                  <h3 style="color:white" for="file">Agregar imagen</h3>
+              </div>
+              <div class="col col-sm-4">
+                  <input type="file" name="file" (change)="onFileSelected($event)">
+              </div>
+              <div class="col col-sm-4">
+                <button (click)="save()" class="btn btn-success">Guardar</button>
+              </div>                                          
+            </div>
+        <div class="table100">
+          <table *ngIf="ready">
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">Matricula</th>
+                <th class="column2">Imagen</th>                
+                <th class="column7">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let image of images | filter:searchText | paginate: { itemsPerPage: 1, currentPage: p }">
+                <td class="column1">{{image.card_id}}</td>
+                <td class="column2">
+                  <img [src]="image.image" alt="IMG" width="50px" height="50px">
+                </td> 
+                <td class="column3">                  
+                  <button class="btn btn-danger" (click)="delete(image.id)">Eliminar</button>                
+                </td>
+              </tr>
+
+            </tbody>
+          </table>          
+          <br>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>                
+  </div>
+  
+</div>

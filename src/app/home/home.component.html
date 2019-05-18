@@ -45,8 +45,11 @@
                 <td class="column5">{{student.grade}}</td>
                 <td class="column6">{{student.curp}}</td>
                 <td class="column7">
-                  <a class="btn btn-info" [routerLink]="[ '/student/'+student.card ]">Editar</a>   
-                  <button class="btn btn-danger" (click)="delete(student.card)">Eliminar</button>                
+                  <div class="row">
+                    <a class="btn btn-info" [routerLink]="[ '/student/'+student.card ]">Editar</a><br>
+                    <button class="btn btn-danger" (click)="delete(student.card)">Eliminar</button><br> 
+                    <a [routerLink]="['/images/'+student.card]" class="btn btn-warning">Imagenes</a>  
+                  </div>             
                 </td>
               </tr>
 
