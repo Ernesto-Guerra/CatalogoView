@@ -1,101 +1,61 @@
-<div class="container text-center">
-  <h1>{{title}}</h1>
-</div>
 
-<div class="addButton align-content-center" style="position: absolute;">
-  <input style="position: absolute;" type="checkbox" id="toggle">
-  <label style="position: absolute;" for="toggle" class="button"></label>
+  <div class="limiter">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+          <a class="navbar-brand" href="home">SIDRIE</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link active" href="home">Estudiantes <span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link" href="majors">Carreras</a>
+              <a class="nav-item nav-link" href="classes">Clases</a>
+              <a class="nav-item nav-link disabled" href="#">Disabled</a>
+            </div>
+          </div>
+        </nav>
+    <div class="container-table100">                                  
+      <div class="wrap-table100">
+          <div class="text-center">
+              <h1 style="color:white">{{title}}</h1>
+            </div><br>
+          <div class="search-student">
+              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+                placeholder="&#61442;  Buscar Estudiante">
+            </div><br>
+        <div class="table100">
+          <table>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">Matricula</th>
+                <th class="column2">Nombre</th>
+                <th class="column3">Apellido</th>
+                <th class="column4">Carrera</th>
+                <th class="column5">Cuatrimestre</th>
+                <th class="column6">CURP</th>
+                <th class="column7">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let student of students | filter:searchText | paginate: { itemsPerPage: 1, currentPage: p }">
+                <td class="column1">{{student.card}}</td>
+                <td class="column2">{{student.first_name}}</td>
+                <td class="column3">{{student.last_name}}</td>
+                <td class="column4">{{student.major_name}}</td>
+                <td class="column5">{{student.grade}}</td>
+                <td class="column6">{{student.curp}}</td>
+                <td class="column7">
+                  <a class="btn btn-info" [routerLink]="[ '/student/'+student.card ]">Editar</a>   
+                  <button class="btn btn-danger" (click)="delete(student.card)">Eliminar</button>                
+                </td>
+              </tr>
 
-  <nav class="nav" style="position: absolute;">
-    <div class="row">
-      <div class="col col-sm 6">
-        <label for="uno">Matricula</label>
-        <input [(ngModel)]="student.card" class="form-control" type="text" name="uno" id="uno"><br>
-      </div>
-
-      <div class="col col-sm 6">
-        <label for="uno">Nombre</label>
-        <input [(ngModel)]="student.first_name" class="form-control" type="text" name="uno" id="uno">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col col-sm 6">
-        <label for="uno">Apellido</label>
-        <input [(ngModel)]="student.last_name" class="form-control" type="text" name="uno" id="uno"><br>
-      </div>
-
-      <div class="col col-sm 6">
-        <label for="uno">Carrera</label>
-        <select [(ngModel)]="student.major_id" class="custom-select" name="" id="">
-          <option value="1">Ingenieria en Desarrollo de Software</option>
-          <option value="2">Ingenieria Biomedica</option>
-          <option value="3">Ingenieria Mecatronica</option>
-        </select>
-      </div>
-      
-    </div>
-
-    <div class="row">
-      <!-- <div class="col col-sm 6">
-        <label for="uno">Cuatrimestre</label>
-        <input [(ngModel)]="student.grade" class="form-control" type="text" name="uno" id="uno"><br>
-      </div> -->
-
-      <div class="col col-sm-6" *ngIf="student.curp==null || student.curp==''">
-          <label for="uno">Genero</label>
-        <select name="sex" id="sex" [(ngModel)]="student.sex" class="custom-select">
-          <option value="hombre">Hombre</option>
-          <option value="mujer">Mujer</option>
-        </select>
-      </div>
-
-      <div class="col col-sm 6">
-        <label for="uno">CURP</label>
-        <input [(ngModel)]="student.curp" class="form-control" type="text" name="uno" id="uno">
-      </div>
-    </div>
-
-
-    <button (click)="agregar()" style="margin: 10px" class="btn btn-success btn-block">Guardar</button>
-  </nav>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="search-student">
-      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
-        placeholder="&#61442;  Buscar Estudiante">
-    </div>
-
-    <table class="table table-striped table-dark">
-      <thead>
-        <tr>
-          <th scope="col">Matricula</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Apellido</th>
-          <th scope="col">Carrera</th>
-          <th scope="col">Cuatrimestre</th>
-          <th scope="col">CURP</th>
-          <th scope="col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody">
-        <tr *ngFor="let student of students | filter:searchText | paginate: { itemsPerPage: 1, currentPage: p }">
-          <th scope="row">{{student.card}}</th>
-          <td>{{student.first_name}}</td>
-          <td>{{student.last_name}}</td>
-          <td>{{student.major_name}}</td>
-          <td>{{student.grade}}</td>
-          <td>{{student.curp}}</td>
-          <td>
-            <a class="btn btn-info" [routerLink]="[ '/student/'+student.card ]">Editar</a>
-            <button class="btn btn-danger" (click)="delete(student.card)">Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </tbody>
+          </table>          
+          <br>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>                
   </div>
+  
 </div>
-<!-- </div> -->

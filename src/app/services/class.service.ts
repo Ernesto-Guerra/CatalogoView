@@ -20,4 +20,12 @@ export class ClassService {
   delete(id){
     return this.http.delete(`${this.api}/classes/${id}`)
   }
+
+  show(id){
+    return this.http.get(`${this.api}/classes/${id}`)
+  }
+
+  update(id,classs){
+    return this.http.put(`${this.api}/classes/${id}`,classs)
+  }
 }

@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div>
     <div class="form-group">
       <label for="card">Matricula</label>
@@ -44,4 +44,62 @@
   </div>
 
   <button class="btn btn-success btn-block" (click)="save()">Guardar</button>
+</div> -->
+
+<div class="contact1">
+  <div class="container-contact1">
+    <div class="contact1-pic js-tilt" data-tilt>
+      <img src="https://www.drawingtutorials101.com/drawing-tutorials/Video-Games/Mystic-Messenger/student-guest/how-to-draw-Student-Guest-from-Mystic-Messenger-step-0.png" alt="IMG">
+    </div>
+
+    <form class="contact1-form validate-form">
+      <span class="contact1-form-title" *ngIf="modify">
+        Editar estudiante
+      </span>
+      <span *ngIf="modify==false" class="contact1-form-title">
+        Registrar nuevo estudiante
+      </span>
+
+      <div class="wrap-input1 validate-input">
+        <input class="input1" type="text" name="card" placeholder="Matricula" [(ngModel)]="student.card">
+        <span class="shadow-input1"></span>
+      </div>
+
+      <div class="wrap-input1 validate-input">
+        <input class="input1" type="text" name="first_name" placeholder="Nombre" [(ngModel)]="student.first_name">
+        <span class="shadow-input1"></span>
+      </div>
+
+      <div class="wrap-input1 validate-input">
+        <input class="input1" type="text" name="last_name" placeholder="Apellido" [(ngModel)]="student.last_name">
+        <span class="shadow-input1"></span>
+      </div>
+
+      <div class="wrap-input1 validate-input">        
+        <select class="input1" name="major_id" [(ngModel)]="student.major_id">
+          <option *ngFor="let major of majors" [value]="major.id">{{major.name}}</option>
+        </select>
+        <span class="shadow-input1"></span>
+      </div>
+
+      <!-- <div class="wrap-input1 validate-input">
+        <input class="input1" type="" name="sex" placeholder="Genero">
+        <span class="shadow-input1"></span>
+      </div> -->
+
+      <div class="wrap-input1 validate-input">
+        <input class="input1" type="text" name="curp" placeholder="CURP" [(ngModel)]="student.curp">
+        <span class="shadow-input1"></span>
+      </div>
+
+      <div class="container-contact1-form-btn">
+        <button (click)="save(this.student)" class="contact1-form-btn">
+          <span>
+            Guardar
+            <i class="far fa-save"></i>
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

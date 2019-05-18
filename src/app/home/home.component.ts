@@ -86,6 +86,7 @@ export class HomeComponent implements OnInit {
         if(response.hasOwnProperty('msg')){
           alert('El estudiante fue eliminado')
           console.log(this.students)          
+          location.replace('/home')
         }
         else{
           alert('El estudiante no fue eliminado')

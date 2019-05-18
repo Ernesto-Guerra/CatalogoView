@@ -21,7 +21,9 @@ import { ErrorInterceptor} from './helpers/error.interceptor';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MajorsComponent } from './majors/majors.component';
-import { ClassesComponent } from './classes/classes.component'; 
+import { ClassesComponent } from './classes/classes.component';
+import { EditClassesComponent } from './edit-classes/edit-classes.component';
+import { ImagesComponent } from './images/images.component'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,9 @@ import { ClassesComponent } from './classes/classes.component';
     HomeComponent,
     EditStudentComponent,
     MajorsComponent,
-    ClassesComponent
+    ClassesComponent,
+    EditClassesComponent,
+    ImagesComponent
   ],
   imports: [
     BrowserModule,
