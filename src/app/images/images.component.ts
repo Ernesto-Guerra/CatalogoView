@@ -14,7 +14,8 @@ export class ImagesComponent implements OnInit {
   id = null
   ready = false
   images = {}
-  archivo = null
+  archivo = null  
+  video = null
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = +params['id']
@@ -25,6 +26,21 @@ export class ImagesComponent implements OnInit {
       console.log(this.images)
       this.ready = true
     })
+
+    // var constraints ={
+    //   audio : false,
+    //   video : true
+    // }
+
+    // navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream){
+    //   var video = document.querySelector('video')      
+    //   video.srcObject = mediaStream      
+    //   video.play()
+      
+    //   console.log(video)
+    // }).catch(function(error){
+    //   console.log(error)
+    // })
   }
 
   delete(id){
@@ -48,17 +64,18 @@ export class ImagesComponent implements OnInit {
 
   save(){
         
-    var data = {
-      card_id : this.id,
-      image : '../assets/'+this.archivo.name
-    }  
+    // var data = {
+    //   card_id : this.id,
+    //   image : '../assets/'+this.archivo.name
+    // }  
 
-    console.log(data)
+    // console.log(data)
 
-    this.imageService.create(data).subscribe(response=>{
-      console.log(response)
-      location.replace('/images/'+this.id)
-    })
+    // this.imageService.create(data).subscribe(response=>{
+    //   console.log(response)
+    //   location.replace('/images/'+this.id)
+    // })
+    console.log(this.video)
   }
 
   onFileSelected(event){
