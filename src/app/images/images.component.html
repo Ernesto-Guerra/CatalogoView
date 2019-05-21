@@ -20,18 +20,19 @@
           <div class="text-center">
               <h1 style="color:white">Imagenes {{id}}</h1>
             </div><br>          
-            <div class="row">
-
-              <div class="col col-sm-4">
-                  <h3 style="color:white" for="file">Agregar imagen</h3>
-              </div>
-              <div class="col col-sm-4">
-                  <input type="file" name="file" (change)="onFileSelected($event)">
-              </div>
-              <div class="col col-sm-4">
-                <button (click)="save()" class="btn btn-success">Guardar</button>
-              </div>                                          
-            </div>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col col-sm-4">
+                    <h3 style="color:white" for="file">Agregar imagen</h3>
+                </div>
+                <div class="col col-sm-4">
+                    <input type="file" name="file" id="file" (change)="onFileChange($event)" #fileInput>
+                </div>
+                <div class="col col-sm-4">
+                  <button type="submit" class="btn btn-success">Guardar</button>
+                </div> 
+              </div>                                         
+            </form>
         <div class="table100">
           <table *ngIf="ready">
             <thead>

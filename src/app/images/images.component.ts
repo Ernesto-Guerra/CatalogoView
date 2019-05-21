@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ImageService } from '../services/image.service'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-images',
@@ -8,9 +9,17 @@ import { ImageService } from '../services/image.service'
   styleUrls: ['./images.component.css']
 })
 export class ImagesComponent implements OnInit {
+  form: FormGroup;
 
-  constructor(private route: ActivatedRoute, private imageService : ImageService) { }
+  constructor(private route: ActivatedRoute, private imageService : ImageService, private fb : FormBuilder) {
+    this.createForm()
+   }
   
+   createForm() {
+    this.form = this.fb.group({
+      file: null   
+    });
+  }
   id = null
   ready = false
   images = {}
@@ -26,21 +35,7 @@ export class ImagesComponent implements OnInit {
       console.log(this.images)
       this.ready = true
     })
-
-    // var constraints ={
-    //   audio : false,
-    //   video : true
-    // }
-
-    // navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream){
-    //   var video = document.querySelector('video')      
-    //   video.srcObject = mediaStream      
-    //   video.play()
-      
-    //   console.log(video)
-    // }).catch(function(error){
-    //   console.log(error)
-    // })
+    
   }
 
   delete(id){
@@ -78,8 +73,30 @@ export class ImagesComponent implements OnInit {
     console.log(this.video)
   }
 
-  onFileSelected(event){
-    this.archivo = event.target.files[0]
+  onFileChange(event) {
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.form.get('file').setValue({
+          filename: file.name,
+          filetype: file.type,
+          // value: reader.result.split(',')[1]
+          value: reader.result
+        })
+      };
+    }
+  }
+
+  onSubmit() {
+    const formModel = this.form.value;    
+    // In a real-world app you'd have a http request / service call here like
+    // this.http.post('apiUrl', formModel)
+    setTimeout(() => {
+      console.log(formModel);
+      alert('done!');      
+    }, 1000);
   }
 }
 
