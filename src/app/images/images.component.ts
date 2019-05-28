@@ -83,7 +83,8 @@ export class ImagesComponent implements OnInit {
           filename: file.name,
           filetype: file.type,
           // value: reader.result.split(',')[1]
-          value: reader.result
+          value: reader.result,
+          card_id: this.id
         })
       };
     }
@@ -91,12 +92,16 @@ export class ImagesComponent implements OnInit {
 
   onSubmit() {
     const formModel = this.form.value;    
-    // In a real-world app you'd have a http request / service call here like
-    // this.http.post('apiUrl', formModel)
-    setTimeout(() => {
-      console.log(formModel);
-      alert('done!');      
-    }, 1000);
+    console.log(formModel)
+    this.imageService.create(formModel).subscribe(response =>{
+      console.log('respuesta')
+      console.log(response)
+    })
+    console.log('fin')
+    // setTimeout(() => {
+    //   console.log(formModel);
+    //   alert('done!');      
+    // }, 1000);
   }
 }
 
