@@ -1,0 +1,32 @@
+<div>
+  <app-navbar-admin></app-navbar-admin>
+  <div>
+    <div>
+      <div [hidden]="!ready" id="aaa" style="padding: 2em">
+        <div class="row">
+          <div class="col-sm-6" style="text-align: center">
+            <video #video id="video" width="540" height="380" autoplay>sdfndsjkfdsbfdsjk</video><br>
+            <i style="text-align: left; color:crimson" class="fas fa-video">  Live</i><br>
+            <button class="btn btn-raised btn-info" id="snap" (click)="capture()">Tomar Foto</button>
+          </div>
+          <div class="col-sm-6" style="text-align: center">
+            <canvas style="border: solid 2px; border-radius: 25px;" #canvas id="canvas" width="540" height="380"></canvas><br>
+            <button class="btn btn-raised btn-danger" id="snap" (click)="descartar()">Descartar</button>
+            <button class="btn btn-raised btn-success" id="snap" (click)="guardar()">Guardar</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!ready">
+        <div style="background-color: rgb(228, 227, 227);">
+          <div style="justify-content: center; padding: 5em;" class="row">
+            <button class="btn" (click)="getReady()">
+              <div style="background-color: white; padding: 2em; border-radius: 25px">
+                <img src="../../assets/camera-icon.png" alt="CAMERA" width="300px" height="300px">
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

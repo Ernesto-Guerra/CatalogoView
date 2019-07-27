@@ -1,0 +1,114 @@
+<!-- <div>
+  <app-navbar-student></app-navbar-student>
+  <div style="margin: .5em; text-align: center; padding: 2em" class="container">
+    <div class="row">
+      <div class="col col-sm-4">
+        <h3>Agregar Materias</h3>
+
+        <table  style="border-radius: 25px; background-color: rgb(226, 228, 229);" class="table table-borderless" *ngIf="ready">
+          <thead>
+            <th scope="col">Nombre</th>
+            <th scope="col">Cuatrimestre</th>
+            <th scope="col"></th>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let class of to_show_classes">
+              <td>{{class.name}}</td>
+              <td>{{class.grade}}</td>
+              <td>
+                <button (click)="addClass(class.id)" class="btn">
+                  <i style="color:chartreuse; font-size: 1.5em;" class="fas fa-plus-circle"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col col-sm-8">
+        <h3>Materias</h3>
+
+        <table  style="border-radius: 25px; background-color: rgb(226, 228, 229);" class="table table-borderless" *ngIf="ready">
+          <thead>
+            <th scope="col">Nombre</th>
+            <th scope="col">Cuatrimestre</th>
+            <th scope="col"></th>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let item of actual_to_show_classes">
+              <td>{{item.name}}</td>
+              <td>{{item.grade}}</td>
+              <td>
+                <button (click)="removeClass(item.key)" class="btn">
+                  <i style="color:crimson; font-size: 1.5em;" class="fas fa-minus-circle"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div> -->
+
+<div>
+  <app-navbar-student></app-navbar-student>
+  <div style="text-align: center" class="container">
+
+    <h2 style="margin: .5em" *ngIf="ready"></h2><br>
+    <div class="row">
+
+      <div class="col col-sm-4">
+        <h3>Agregar materias</h3>
+
+        <table style="border-radius: 25px; background-color: rgb(226, 228, 229);" class="table table-borderless">
+          <thead>
+            <th scope="col">Nombre</th>
+            <th scope="col">Cuatrimestre</th>
+            <th scope="col"></th>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let class of to_show_classes">
+              <td>{{class.name}}</td>
+              <td>{{class.grade}}</td>
+              <td>
+                <button (click)="addClass(class.id)" class="btn">
+                  <i style="color:chartreuse; font-size: 1.5em;" class="fas fa-plus-circle"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col col-sm-8">
+        <h3>Materias</h3>
+
+        <table style="border-radius: 25px; background-color: rgb(226, 228, 229);" class="table table-borderless">
+          <thead>
+            <th scope="col">Nombre</th>
+            <th scope="col">Cuatrimestre</th>
+            <th scope="col"></th>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let item of actual_to_show_classes">
+              <td>{{item.name}}</td>
+              <td>{{item.grade}}</td>
+              <td>
+                <button (click)="removeClass(item.key)" class="btn">
+                  <i style="color:crimson; font-size: 1.5em;" class="fas fa-minus-circle"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

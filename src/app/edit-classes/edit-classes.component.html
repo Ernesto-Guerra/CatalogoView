@@ -1,18 +1,30 @@
-<div class="container">  
-  
-  <div>
-    <div class="form-group">
-      <label for="first_name">Nombre</label>
-      <input name="first_name" type="text" class="form-control" [(ngModel)]="classs.name">
-    </div>
-  </div>
-  
-  <div>
-    <div class="form-group">
-      <label for="last_name">Cuatrimestre</label>
-      <input name="last_name" type="text" class="form-control" [(ngModel)]="classs.grade">
-    </div>
-  </div>  
+<div>
+  <app-navbar-admin></app-navbar-admin>
+  <div style="background-image: url('../../assets/background.jpg'); height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
 
-  <button class="btn btn-success btn-block" (click)="save()">Guardar</button>
+   <div class="container">
+      <div class="row">
+          <div class="col col-sm-4"></div>
+        <div class="col-sm-4" style="background-color: rgba(255, 255, 255, 0.767); border-radius: 15px; margin-top: 15%; margin-bottom: 15%">
+         <div class="card-body">
+            <div>
+              <div class="form-group">
+                <label for="first_name">Nombre</label>
+                <input name="first_name" type="text" class="form-control" [(ngModel)]="classs.name">
+              </div>
+            </div>
+            
+            <div>
+              <div class="form-group">
+                <label for="last_name">Cuatrimestre</label>
+                <input name="last_name" type="text" class="form-control" [(ngModel)]="classs.grade">
+              </div>
+            </div>
+            
+            <button class="btn btn-raised btn-success btn-block" (click)="save()">Guardar</button>
+         </div>
+        </div>
+      </div>
+   </div>
+  </div>
 </div>

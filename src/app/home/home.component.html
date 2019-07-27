@@ -1,64 +1,87 @@
+<div>
+  <app-navbar-admin></app-navbar-admin>
 
-  <div class="limiter">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-          <a class="navbar-brand" href="home">SIDRIE</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+  <!-- Button trigger modal -->
+  <button style="margin: 2em" type="button" class="btn btn-outline-info" data-toggle="modal"
+    data-target="#exampleModal">
+    Opciones
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Seleccionar archivo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-item nav-link active" href="home">Estudiantes <span class="sr-only">(current)</span></a>
-              <a class="nav-item nav-link" href="majors">Carreras</a>
-              <a class="nav-item nav-link" href="classes">Clases</a>
-              <a class="nav-item nav-link disabled" href="#">Disabled</a>
-            </div>
-          </div>
-        </nav>
-    <div class="container-table100">                                  
-      <div class="wrap-table100">
-          <div class="text-center">
-              <h1 style="color:white">{{title}}</h1>
-            </div><br>
-          <div class="search-student">
-              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
-                placeholder="&#61442;  Buscar Estudiante">
-            </div><br>
-        <div class="table100">
-          <table>
-            <thead>
-              <tr class="table100-head">
-                <th class="column1">Matricula</th>
-                <th class="column2">Nombre</th>
-                <th class="column3">Apellido</th>
-                <th class="column4">Carrera</th>
-                <th class="column5">Cuatrimestre</th>
-                <th class="column6">CURP</th>
-                <th class="column7">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let student of students | filter:searchText | paginate: { itemsPerPage: 1, currentPage: p }">
-                <td class="column1">{{student.card}}</td>
-                <td class="column2">{{student.first_name}}</td>
-                <td class="column3">{{student.last_name}}</td>
-                <td class="column4">{{student.major_name}}</td>
-                <td class="column5">{{student.grade}}</td>
-                <td class="column6">{{student.curp}}</td>
-                <td class="column7">
-                  <div class="row">
-                    <a class="btn btn-info" [routerLink]="[ '/student/'+student.card ]">Editar</a><br>
-                    <button class="btn btn-danger" (click)="delete(student.card)">Eliminar</button><br> 
-                    <a [routerLink]="['/images/'+student.card]" class="btn btn-warning">Imagenes</a>  
-                  </div>             
-                </td>
-              </tr>
-
-            </tbody>
-          </table>          
-          <br>
-          <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
-      </div>                
+        <div class="modal-body">          
+          <label for="subir">Subir lista</label><br>
+          <input class="btn btn-block btn-outline-warning" type="file" (change)="onFileChange($event)" name="subir"/>
+          <button class="btn btn-outline-success" (click)="actualizarTodos()">Guardar</button> <br><br>       
+          <button class="btn btn-block btn-outline-warning" (click)="descargar()">Descargar lista</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button (click)="lista()" style="margin: 10px" class="btn btn-raised btn-success">Guardar</button>
+        </div>
+      </div>
+    </div>
   </div>
-  
+
+  <div style="margin-top: 1em" class="container">
+
+    <div style="margin-bottom: 3em" class="row">
+      <div class="col col-sm-2"></div>
+      <div class="col col-sm-8">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+          placeholder="Buscar...">
+      </div>
+      <div class="col col-sm-2"></div>
+    </div>
+
+    <div class="row">
+      <table style="text-align: center" class="table table-borderless">
+        <thead>
+          <tr>
+            <th scope="col">Matricula</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Carrera</th>
+            <th scope="col">Cuatrimestre</th>
+            <th scope="col">CURP</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+
+        <tbody style="font-size: 14px">
+          <tr *ngFor="let student of students | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
+            <th scope="row">{{student.card}}</th>
+            <td>{{student.first_name}}</td>
+            <td>{{student.last_name}}</td>
+            <td>{{student.major_name}}</td>
+            <td>{{student.grade}}</td>
+            <td>{{student.curp}}</td>
+            <td>
+              <a style="font-size: 1.2em;" class="btn" [routerLink]="[ '/images/'+student.card]">
+                <i class="fas fa-images"></i>
+              </a>
+              <a class="btn" [routerLink]="[ '/student/'+student.card]">
+                <i style="color:dodgerblue; font-size: 1.2em;" class="fas fa-edit"></i>
+              </a>
+              <button class="btn" (click)="delete(student.card)">
+                <i style="color:crimson; font-size: 1.2em;" class="fas fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <pagination-controls style="margin-top: 2em; margin-bottom: 2em;" (pageChange)="p = $event"></pagination-controls>
+
+  </div>
 </div>

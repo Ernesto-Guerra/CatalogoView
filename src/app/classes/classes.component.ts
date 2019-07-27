@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClassService } from '../services/class.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-classes',
@@ -10,7 +11,7 @@ import { ClassService } from '../services/class.service'
 
 export class ClassesComponent implements OnInit {
 
-  constructor(private classService : ClassService) { }
+  constructor(private classService : ClassService, private router:Router) { }
   
   classes = {}
   classs = {}
@@ -18,6 +19,10 @@ export class ClassesComponent implements OnInit {
   ready = false
 
   ngOnInit() {
+    this.inicio()
+  }
+
+  inicio(){
     this.classService.getAll().subscribe(response => {
       this.classes=response
       console.log(this.classes)
@@ -30,8 +35,8 @@ export class ClassesComponent implements OnInit {
       console.log(response)
       this.classs = {}
       alert('Materia creada con exito')
-
-      location.replace('/classes')
+      
+      this.inicio()
     })    
   }
 
@@ -40,7 +45,7 @@ export class ClassesComponent implements OnInit {
       this.classService.delete(id).subscribe(response => {
         console.log(response)
         alert('Elemento eliminado con éxito')
-        location.replace('/classes')
+        this.inicio()
       })
     }    
     else{

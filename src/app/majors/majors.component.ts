@@ -24,6 +24,10 @@ export class MajorsComponent implements OnInit {
   students: Student[] = [];
 
   ngOnInit() {
+    this.inicio()
+  }
+
+  inicio(){
     this.route.params.subscribe(params => {
       this.majorService.getAll().pipe(first()).subscribe(majors => {
         console.log(majors)
@@ -53,9 +57,9 @@ export class MajorsComponent implements OnInit {
     this.majorService.create(this.major).subscribe(response =>{
       console.log(response)
 
+      this.major={}
       alert('Carrera creada con exito')
-
-      location.replace('/majors')
+      this.inicio()
     })
   }
 

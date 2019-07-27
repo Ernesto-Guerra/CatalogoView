@@ -23,7 +23,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MajorsComponent } from './majors/majors.component';
 import { ClassesComponent } from './classes/classes.component';
 import { EditClassesComponent } from './edit-classes/edit-classes.component';
-import { ImagesComponent } from './images/images.component'; 
+import { ImagesComponent } from './images/images.component';
+import { TakePhotoComponent } from './take-photo/take-photo.component';
+import { MajorClassesComponent } from './major-classes/major-classes.component';
+import { HomeStudentComponent } from './home-student/home-student.component';
+import { StudentClassesComponent } from './student-classes/student-classes.component';
+import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
+import { HomeAdminComponent } from './home-admin/home-admin.component';
+import { NavbarStudentComponent } from './navbar-student/navbar-student.component'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +41,14 @@ import { ImagesComponent } from './images/images.component';
     MajorsComponent,
     ClassesComponent,
     EditClassesComponent,
-    ImagesComponent
+    ImagesComponent,
+    TakePhotoComponent,
+    MajorClassesComponent,
+    HomeStudentComponent,
+    StudentClassesComponent,
+    NavbarAdminComponent,
+    HomeAdminComponent,
+    NavbarStudentComponent
   ],
   imports: [
     BrowserModule,
@@ -47,13 +61,13 @@ import { ImagesComponent } from './images/images.component';
     ReactiveFormsModule,
     AppRoutingModule,
     Ng2SearchPipeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    SignupService
+    SignupService,
   ],
   bootstrap: [AppComponent]
 })

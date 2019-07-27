@@ -1,7 +1,8 @@
 import { Component, OnInit,  ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ImageService } from '../services/image.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-images',
@@ -9,10 +10,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./images.component.css']
 })
 export class ImagesComponent implements OnInit {
-  form: FormGroup;
+  form: FormGroup;  
+  prueba = 0    
+  
+  // imgb = require('base64-img')  
 
-  constructor(private route: ActivatedRoute, private imageService : ImageService, private fb : FormBuilder) {
-    this.createForm()
+  constructor(private route: ActivatedRoute, private router:Router, private imageService : ImageService, private fb : FormBuilder) {
+    this.createForm()           
    }
   
    createForm() {
@@ -22,29 +26,39 @@ export class ImagesComponent implements OnInit {
   }
   id = null
   ready = false
-  images = {}
-  archivo = null  
-  video = null
-  ngOnInit() {
+  images = {}    
+
+  async ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = +params['id']
     })
-
-    this.imageService.get(this.id).subscribe(response=>{
-      this.images = response
-      console.log(this.images)
-      this.ready = true
-    })
     
+      await this.imageService.get(this.id).subscribe(response=>{
+        this.images = response
+        console.log(this.images)
+       
+        this.prueba++
+        if(this.images[0].listo && this.images[0].card_id==this.id){
+          console.log(this.images[0].listo)
+          this.ready = true
+          console.log('Listo')
+        }
+        else{        
+          location.reload()
+          console.log('Repitiendo')          
+        }      
+      })
+        
   }
+  
 
   delete(id){
     if(confirm('¿Deseas eliminar esta imagen?')){
       this.imageService.delete(id).subscribe(response=>{
         if(response.hasOwnProperty('msg')){
           alert('La imagen fue eliminada')
-          console.log(this.images)          
-          location.replace('/images/'+this.id)
+          console.log(this.images)                    
+          this.router.navigateByUrl('/images/'+this.id)
         }
         else{
           alert('La imagen no fue eliminada')
@@ -67,23 +81,23 @@ export class ImagesComponent implements OnInit {
     // console.log(data)
 
     // this.imageService.create(data).subscribe(response=>{
-    //   console.log(response)
-    //   location.replace('/images/'+this.id)
-    // })
-    console.log(this.video)
+    //   console.log(response)    
+    // })    
   }
 
+
   onFileChange(event) {
-    let reader = new FileReader();
+    let reader = new FileReader();    
     if(event.target.files && event.target.files.length > 0) {
       let file = event.target.files[0];
+      console.log(file)
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.form.get('file').setValue({
           filename: file.name,
           filetype: file.type,
           // value: reader.result.split(',')[1]
-          value: reader.result,
+          image: reader.result,
           card_id: this.id
         })
       };
@@ -92,16 +106,19 @@ export class ImagesComponent implements OnInit {
 
   onSubmit() {
     const formModel = this.form.value;    
-    console.log(formModel)
-    this.imageService.create(formModel).subscribe(response =>{
-      console.log('respuesta')
-      console.log(response)
-    })
-    console.log('fin')
-    // setTimeout(() => {
-    //   console.log(formModel);
-    //   alert('done!');      
-    // }, 1000);
+    console.log(formModel.file)       
+    var extension = formModel.file.filename.substring(formModel.file.filename.length, formModel.file.filename.length -3)    
+    var ruta = `${Date.now()}-${this.id}`     
+    let data ={
+      card_id : formModel.file.card_id,
+      image : `../../assets/${ruta}.${extension}`,
+      image64: formModel.file.image
+    }
+    console.log(data)    
+    this.imageService.create(data).subscribe(response=>{
+      console.log(response)      
+      location.reload()
+    })    
   }
 }
 

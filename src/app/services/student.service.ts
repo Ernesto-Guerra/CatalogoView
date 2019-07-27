@@ -40,4 +40,8 @@ export class StudentService {
     console.log(student)
     return this.http.post<Student>(`${this.api}/students`, student)
   }
+
+  getByMail(email){
+    return this.http.get(`${this.api}/user-mail/${email}`)
+  }
 }

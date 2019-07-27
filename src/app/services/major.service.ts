@@ -20,4 +20,8 @@ export class MajorService {
   create(major){    
     return this.http.post(`${this.api}/majors`,major)
   }
+
+  show(id){
+    return this.http.get(`${this.api}/majors/${id}`)
+  }
 }

@@ -1,0 +1,26 @@
+<div>
+  <nav class="navbar navbar-dark navbar-expand-lg" style="background-color: black;">
+      <a class="navbar-brand" [routerLink]="['/inicio']">
+        <img src="../../assets/uplogo.png" width="50px" heigth="50px">
+        SIDRIE
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">            
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/myclasses']">Mis Clases</a>
+          </li>          
+        </ul>          
+      </div>
+      
+      <div class="form-inline">          
+        <button class="btn btn-danger my-2 my-sm-0" (click)="cerrar()">
+          Cerrar sesión            
+        </button>
+      </div>
+
+    </nav>
+</div>
